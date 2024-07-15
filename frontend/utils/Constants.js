@@ -40,3 +40,7 @@ export const demoVideoUrl = '/video/GDa8kZLNhJ4';
 export const demoChannelTitle = 'JavaScript Mastery';
 export const demoVideoTitle = 'Build and Deploy 5 JavaScript & React API Projects in 10 Hours - Full Course | RapidAPI';
 export const demoProfilePicture = 'http://dergipark.org.tr/assets/app/images/buddy_sample.png'
+
+
+export const api_token = "1207dfec21msh8999936bd805b45p1ab34cjsnf5f067e25f8c"
+

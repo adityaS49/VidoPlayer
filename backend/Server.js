@@ -4,15 +4,10 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const app = express();
 const port = 4000;
-const cors = require('cors');
-// Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://bhardwajaditya7857:u6wnnYBzkjiqFYbh@vidoplayer.tarpssc.mongodb.net/",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+const cors = require("cors");
+require("dotenv").config();
+
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
   console.log("Mongoose connected to MongoDB");
@@ -25,8 +20,6 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("disconnected", () => {
   console.log("Mongoose disconnected from MongoDB");
 });
-
-// Middleware to parse JSON bodies
 app.use(bodyParser.json());
 app.use(cors());
 // Register endpoint
@@ -52,8 +45,8 @@ app.post("/registerdetails", async (req, res) => {
 
 // Login endpoint
 app.post("/logindetails", async (req, res) => {
-const {email,password}  = req.body;
-console.log(req.body)
+  const { email, password } = req.body;
+  console.log(req.body);
 
   try {
     const user = await User.findOne({ email });
@@ -62,26 +55,23 @@ console.log(req.body)
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-   // Assuming you have retrieved user data from the database
-const storedPassword = user.password;
+    // Assuming you have retrieved user data from the database
+    const storedPassword = user.password;
 
-// Compare plaintext passwords
-if (password === storedPassword) {
-  // Passwords match
-  res.json({ message: "Login successful" });
-  
-} else {
-  // Passwords don't match
-  return res.status(401).json({ message: "Invalid credentials" });
-}
-
+    // Compare plaintext passwords
+    if (password === storedPassword) {
+      // Passwords match
+      res.json({ message: "Login successful" });
+    } else {
+      // Passwords don't match
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
   } catch (error) {
     // Handle errors
     console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
 
 // Middleware to protect routes
 const authenticate = async (req, res, next) => {
@@ -102,7 +92,6 @@ const authenticate = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 // Protected route (example)
 app.get("/homepage", authenticate, (req, res) => {
