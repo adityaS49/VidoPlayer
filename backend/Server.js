@@ -3,10 +3,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const app = express();
-const port = 4000;
 const cors = require("cors");
 require("dotenv").config();
 
+const port = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on("connected", () => {
