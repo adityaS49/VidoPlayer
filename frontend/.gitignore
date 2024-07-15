@@ -12,7 +12,10 @@
 # next.js
 /.next/
 /out/
-/utils/Constants.js
+
+# Ignore Constants.js in the utils folder
+utils/Constants.js
+
 # production
 /build
 
