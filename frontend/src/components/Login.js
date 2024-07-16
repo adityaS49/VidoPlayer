@@ -29,7 +29,7 @@ const Login = ({ onLogin,setCurrentView }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:4000/logindetails", {
+      const response = await axios.post("https://vidoplayer-4.onrender.com/logindetails", {
         email,
         password,
       });

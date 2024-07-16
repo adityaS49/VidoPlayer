@@ -31,7 +31,7 @@ const Register = ({ onRegister, setCurrentView }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/registerdetails",
+        "https://vidoplayer-4.onrender.com/registerdetails",
         {
           email: email,
           password: password,
